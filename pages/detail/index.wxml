@@ -1,0 +1,15 @@
+<!--pages/detail/index.wxml.wxml-->
+<view>
+    <view class="article">
+        <view class="title">{{title}}</view>
+        <view class="content">{{content}}</view>
+        <van-tabbar active="{{ active }}" bind:change="onChange">
+            <van-tabbar-item icon="share-o">分享</van-tabbar-item>
+            <van-tabbar-item icon="guide-o">复制内容</van-tabbar-item>
+            <van-tabbar-item icon="chat-o">反馈</van-tabbar-item>
+            <van-share-sheet show="{{ showShare }}" title="立即分享给好友" options="{{ options }}" bind:select="onSelect" bind:close="onClose" />
+            <!-- 在页面内添加对应的节点 -->
+            <van-notify id="van-notify" />
+        </van-tabbar>
+    </view>
+</view>

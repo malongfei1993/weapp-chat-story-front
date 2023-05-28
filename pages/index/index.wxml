@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+
+    <view class="notice">
+        <van-notice-bar left-icon="like" mode="closeable" text="添加到我的小程序，下次使用更方便" />
+    </view>
+    <view class="form">
+
+        <van-cell-group>
+            <van-field value="{{ location }}"  clearable 
+            bind:change="onChange"
+            label="地点"  placeholder="请输入地点" />
+            <van-field value="{{ role }}"  clearable 
+            bind:change="onRoleChange"
+            label="角色"  placeholder="请输入角色" />
+            <van-field value="{{ type }}"  clearable 
+            bind:change="onTypeChange"
+            label="题材"  placeholder="请输入题材" />
+            <van-field value="{{ keyword }}"  clearable 
+            bind:change="onKeyChange"
+            label="关键词"  placeholder="补充任意内容" />
+        </van-cell-group>
+        <view class="button-group">
+          
+<van-button type="warning"  bind:click="reset">清空输入</van-button>
+<van-button type="info" bind:click="create">创建故事</van-button>
+        </view>
+<!-- 在页面内添加对应的节点 -->
+<van-notify id="van-notify" />
+<van-toast id="custom-selector" />
+    </view>
+</view>

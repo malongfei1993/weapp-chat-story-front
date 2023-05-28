@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "故事详情",
+    "usingComponents": {
+        "van-share-sheet": "@vant/weapp/share-sheet/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+        "van-notify": "@vant/weapp/notify/index"
+    }
+}

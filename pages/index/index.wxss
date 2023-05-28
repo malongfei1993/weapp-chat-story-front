@@ -1,0 +1,22 @@
+.notice{
+    width: 100%;
+}
+.form{
+   
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
+  display: inline-block;
+  margin-top: 10px;
+  width: 300px;
+}
+.button-group{
+    margin:10px;
+    
+}
+.button-group van-button{
+    margin:10px;
+    
+}

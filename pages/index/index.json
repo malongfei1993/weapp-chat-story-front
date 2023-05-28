@@ -1,0 +1,14 @@
+{
+    "navigationBarTitleText": "亲子创意故事乐园",
+  "usingComponents": {
+      "van-button":"@vant/weapp/button/index",
+      "van-notice-bar": "@vant/weapp/notice-bar/index",
+      "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+      "van-checkbox": "@vant/weapp/checkbox/index",
+      "van-cell": "@vant/weapp/cell/index",
+      "van-cell-group": "@vant/weapp/cell-group/index",
+      "van-field": "@vant/weapp/field/index",
+      "van-notify": "@vant/weapp/notify/index",
+      "van-toast": "@vant/weapp/toast/index"
+  }
+}
