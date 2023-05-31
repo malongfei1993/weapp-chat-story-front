@@ -1,25 +1,34 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" style="background-image: url({{img}});">
 
     <view class="notice">
         <van-notice-bar left-icon="like" mode="closeable" text="添加到我的小程序，下次使用更方便" />
     </view>
+    <view class="title">
+       想象·创造·连接
+
+    </view>
+    <view class="content">这是给亲子共享的故事应用</view>
+<view class="content">使用简单的词语和主题作为起点,您和宝宝可以一起探索并创造出令人瞩目的故事</view>
     <view class="form">
 
         <van-cell-group>
-            <van-field value="{{ location }}"  clearable 
+            <!-- <van-field value="{{ location }}"  clearable 
             bind:change="onChange"
             label="地点"  placeholder="请输入地点" />
             <van-field value="{{ role }}"  clearable 
             bind:change="onRoleChange"
-            label="角色"  placeholder="请输入角色" />
+            label="角色"  placeholder="请输入角色" /> -->
             <van-field value="{{ type }}"  clearable 
             bind:change="onTypeChange"
-            label="题材"  placeholder="请输入题材" />
+            label="题材"  placeholder="你想要的题材,比如:冒险;" />
+            <view class="example">示例：冒险...</view>
             <van-field value="{{ keyword }}"  clearable 
             bind:change="onKeyChange"
-            label="关键词"  placeholder="补充任意内容" />
+            label="联想词"  placeholder="你想到的,补充任意内容" />
+            <view class="example">示例：小白兔,森林,毛毛虫...</view>
         </van-cell-group>
+      
         <view class="button-group">
           
 <van-button type="warning"  bind:click="reset">清空输入</van-button>

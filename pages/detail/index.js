@@ -1,11 +1,15 @@
 // pages/detail/index.js
 import Notify from '@vant/weapp/notify/notify';
+import {
+    changeImg
+} from '../../utils/img'
 Page({
-
+    socket: null,
     /**
      * 页面的初始数据
      */
     data: {
+        img: '',
         showShare: false,
         options: [{
                 name: '微信',
@@ -30,13 +34,65 @@ Page({
             },
         ],
         title: "test",
-        content: "testtesttesttesttesttesttesttesttesttesttesttesttesttest",
+        content: "",
         active: -1,
     },
 
+    onLoad(options) {
+        this.change()
+        var params = options.x
+        params = decodeURIComponent(params)
+        
+        this.getData(params)
 
 
+    },
+    getData(params) {
 
+        // 创建 WebSocket 客户端对象
+        this.socket = wx.connectSocket({
+            url: 'ws://43.135.136.65:8000/',
+            header: {
+                'content-type': 'application/json'
+            },
+            success: function (res) {
+                console.log('WebSocket 连接成功')
+
+            },
+
+            fail: function (res) {
+                console.log(res)
+            },
+
+        });
+        this.socket.onOpen(() => {
+            this.socket.send({
+                data:params
+            })
+        })
+        this.socket.onMessage((res) => {
+            console.log('从服务器接收到数据:', res.data)
+
+            this.setData({
+                content: this.data.content + res.data
+            })
+        })
+
+        this.socket.onClose((res) => {
+            console.log('WebSocket 连接关闭')
+        });
+
+        this.socket.onError((res) => {
+            console.log('WebSocket 错误:', res.errMsg)
+        });
+    },
+    change() {
+        var img = changeImg()
+
+        this.setData({
+            img: img
+        })
+    },
     onClose() {
         this.setData({
             showShare: false
@@ -67,12 +123,7 @@ Page({
             Notify('当前无法反馈，请稍后再试')
         }
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad(options) {
 
-    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -92,14 +143,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide() {
-
+        this.socket.close()
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload() {
-
+        this.socket.close()
     },
 
     /**

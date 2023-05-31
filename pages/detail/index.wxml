@@ -1,8 +1,10 @@
 <!--pages/detail/index.wxml.wxml-->
 <view>
-    <view class="article">
-        <view class="title">{{title}}</view>
-        <view class="content">{{content}}</view>
+    <view class="container" style="background-image: url({{img}});">
+
+        <view class="content">
+        <rich-text nodes="{{content}}"></rich-text>
+        </view>
         <van-tabbar active="{{ active }}" bind:change="onChange">
             <van-tabbar-item icon="share-o">分享</van-tabbar-item>
             <van-tabbar-item icon="guide-o">复制内容</van-tabbar-item>
