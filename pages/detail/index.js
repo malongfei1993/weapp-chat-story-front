@@ -1,5 +1,6 @@
 // pages/detail/index.js
 import Notify from '@vant/weapp/notify/notify';
+import Dialog from '@vant/weapp/dialog/dialog';
 import {
     changeImg
 } from '../../utils/img'
@@ -9,6 +10,9 @@ Page({
      * 页面的初始数据
      */
     data: {
+        retry:0,
+        params:null,
+        overlayShow:false,
         img: '',
         showShare: false,
         options: [{
@@ -41,50 +45,71 @@ Page({
     onLoad(options) {
         this.change()
         var params = options.x
-        params = decodeURIComponent(params)
-        
+        this.setData({ params: params});
         this.getData(params)
-
-
     },
-    getData(params) {
-
-        // 创建 WebSocket 客户端对象
-        this.socket = wx.connectSocket({
-            url: 'ws://43.135.136.65:8000/',
-            header: {
-                'content-type': 'application/json'
+    alertAndRelauch(){
+        Dialog.alert({
+            message: '同时使用人数过多，请返回页面重新尝试!',
+        })
+        .then(() => {
+            // on confirm
+            
+            wx.navigateBack()
+        })
+    },
+    async getData(params) {
+        
+        this.setData({ overlayShow: true});
+        const that = this
+        // 确认已经在 onLaunch 中调用过 wx.cloud.init 初始化环境（任意环境均可，可以填空）
+        const {
+            socketTask
+        } = await wx.cloud.connectContainer({
+            "config": {
+                "env": "prod-6gmh5fc74753bd5b"
             },
-            success: function (res) {
-                console.log('WebSocket 连接成功')
-
-            },
-
-            fail: function (res) {
-                console.log(res)
-            },
-
-        });
-        this.socket.onOpen(() => {
-            this.socket.send({
-                data:params
+            "service": "hugchat-stream",
+            "path": "/"
+        })
+        that.socket = socketTask
+        that.socket.onMessage(function (res) {
+            if(res.data.includes("error")){
+                //说明服务器返回报错信息
+                console.log(res.data)
+                return
+            }
+            that.setData({ overlayShow: false });
+            that.setData({
+                content: that.data.content + res.data
+            })
+          
+        })
+        that.socket.onOpen(function (res) {
+            console.log('成功连接到服务器')
+            params = decodeURIComponent(params)
+            that.socket.send({
+                data: params
             })
         })
-        this.socket.onMessage((res) => {
-            console.log('从服务器接收到数据:', res.data)
-
-            this.setData({
-                content: this.data.content + res.data
-            })
+        that.socket.onClose(function (res) {
+            that.setData({ overlayShow: false });
+            console.log('连接已断开')
+            console.log(res)
+            if(res.code!=1000&&that.data.retry<5){
+                //非服务端主动正常断开,再次尝试获取数据
+                that.setData({
+                    retry:that.data.retry+=1
+                })
+                console.log(that.data.retry)
+                that.getData(that.data.params)
+            }
+            
+            if(that.data.retry>=5&&res.code!=1000){
+                //超过次数重新回到首页
+                that.alertAndRelauch()
+            }
         })
-
-        this.socket.onClose((res) => {
-            console.log('WebSocket 连接关闭')
-        });
-
-        this.socket.onError((res) => {
-            console.log('WebSocket 错误:', res.errMsg)
-        });
     },
     change() {
         var img = changeImg()
@@ -143,14 +168,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide() {
-        this.socket.close()
+       
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload() {
-        this.socket.close()
+       
     },
 
     /**

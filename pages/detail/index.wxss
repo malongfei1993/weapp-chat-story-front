@@ -7,14 +7,15 @@
  
   
   .content {
-    height: 80%;
- 
-      padding:20px;
+    height: auto;
+    max-height:80%;
+      margin:20px;
+    
     font-size: 16px;
   line-height: 1.6;
   color: white;
   letter-spacing: 0.1em;
-  word-break: break-all;
+  white-space: pre-wrap;
   text-align: left;
   text-indent: 2em;
   overflow: auto;

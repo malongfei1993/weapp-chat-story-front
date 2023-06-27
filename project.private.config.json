@@ -3,6 +3,7 @@
     "projectname": "wx-story-2",
     "setting": {
         "compileHotReLoad": true,
-        "urlCheck": false
-    }
+        "urlCheck": true
+    },
+    "libVersion": "2.32.1"
 }

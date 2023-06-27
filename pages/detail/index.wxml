@@ -1,9 +1,16 @@
 <!--pages/detail/index.wxml.wxml-->
 <view>
     <view class="container" style="background-image: url({{img}});">
+        <van-dialog id="van-dialog" />
+        <van-overlay show="{{ overlayShow }}" />
+        <view class="main-body">
+            <view class="content" wx:if="{{content!=''}}">
+                <rich-text nodes="{{content}}"></rich-text>
+            </view>
 
-        <view class="content">
-        <rich-text nodes="{{content}}"></rich-text>
+            <view wx:else style="margin-top:100px;">
+                <van-loading type="spinner">加载中...</van-loading>
+            </view>
         </view>
         <van-tabbar active="{{ active }}" bind:change="onChange">
             <van-tabbar-item icon="share-o">分享</van-tabbar-item>

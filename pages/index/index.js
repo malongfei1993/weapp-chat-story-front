@@ -68,6 +68,7 @@ Page({
         }
 
         var params = encodeURIComponent(JSON.stringify(result))
+        
         wx.navigateTo({
             url: `/pages/detail/index?x=${params}`
         })

@@ -4,6 +4,9 @@
         "van-share-sheet": "@vant/weapp/share-sheet/index",
         "van-tabbar": "@vant/weapp/tabbar/index",
         "van-tabbar-item": "@vant/weapp/tabbar-item/index",
-        "van-notify": "@vant/weapp/notify/index"
+        "van-notify": "@vant/weapp/notify/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-overlay": "@vant/weapp/overlay/index",
+        "van-loading": "@vant/weapp/loading/index"
     }
 }

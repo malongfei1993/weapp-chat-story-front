@@ -1,15 +1,16 @@
 <!--index.wxml-->
 <view class="container" style="background-image: url({{img}});">
-
+  
     <view class="notice">
         <van-notice-bar left-icon="like" mode="closeable" text="添加到我的小程序，下次使用更方便" />
     </view>
+    <view class="main-body">
     <view class="title">
-       想象·创造·连接
+        想象·创造·连接·英文启蒙
 
     </view>
-    <view class="content">这是给亲子共享的故事应用</view>
-<view class="content">使用简单的词语和主题作为起点,您和宝宝可以一起探索并创造出令人瞩目的故事</view>
+    <view class="content">通过<span class="keyword">关键词</span>定制，生成英文小故事</view>
+    <view class="content">为您创建一段简单、有趣的<span class="keyword">英语</span>小故事。适合启蒙教育，并且可以帮助您的宝宝学习<span class="keyword">英语单词和基本语法</span>。快来尝试吧!</view>
     <view class="form">
 
         <van-cell-group>
@@ -19,23 +20,20 @@
             <van-field value="{{ role }}"  clearable 
             bind:change="onRoleChange"
             label="角色"  placeholder="请输入角色" /> -->
-            <van-field value="{{ type }}"  clearable 
-            bind:change="onTypeChange"
-            label="题材"  placeholder="你想要的题材,比如:冒险;" />
+            <van-field value="{{ type }}" clearable bind:change="onTypeChange" label="题材" placeholder="中文英文均可" />
             <view class="example">示例：冒险...</view>
-            <van-field value="{{ keyword }}"  clearable 
-            bind:change="onKeyChange"
-            label="联想词"  placeholder="你想到的,补充任意内容" />
+            <van-field value="{{ keyword }}" clearable bind:change="onKeyChange" label="联想词" placeholder="中文英文均可" />
             <view class="example">示例：小白兔,森林,毛毛虫...</view>
         </van-cell-group>
-      
+
         <view class="button-group">
-          
-<van-button type="warning"  bind:click="reset">清空输入</van-button>
-<van-button type="info" bind:click="create">创建故事</van-button>
+
+            <van-button type="warning" bind:click="reset">清空输入</van-button>
+            <van-button type="info" bind:click="create">创建故事</van-button>
         </view>
-<!-- 在页面内添加对应的节点 -->
-<van-notify id="van-notify" />
-<van-toast id="custom-selector" />
+        <!-- 在页面内添加对应的节点 -->
+        <van-notify id="van-notify" />
+        <van-toast id="custom-selector" />
     </view>
+</view>
 </view>

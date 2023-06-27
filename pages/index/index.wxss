@@ -9,7 +9,7 @@
   overflow: hidden;
   background-color: #fff;
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 25px;
   width: 300px;
 }
 .button-group{
@@ -31,16 +31,21 @@
 }
 .content{
     color:white;
-    line-height: 30px;
+    line-height: 22px;
     letter-spacing: 1px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin-top: 10px;
     font-size: 16px;
+}
+.keyword{
+    color:red;
+    font-weight: bold;
+    font-style: italic;
 }
 .example{
     font-weight: bold;
     font-size: 15px;
     text-align: right;
     margin-right: 40px;
-    line-height: 16px;
+    line-height: 25px;
 }
